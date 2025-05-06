@@ -6,7 +6,7 @@ import { createId } from '@paralleldrive/cuid2';
 import { v4 as uuidv4 } from 'uuid';
 import { z } from 'zod';
 
-const version = '0.1.2';
+const version = '0.1.3';
 
 const server = new McpServer({
   name: 'id-generator',
@@ -17,26 +17,37 @@ server.tool(
   'generate-id',
   {
     algorithm: z.enum(['cuid2', 'uuid']).default('cuid2'),
+    quantity: z.number().default(1),
   },
-  async ({ algorithm }) => {
+  async ({ algorithm, quantity }) => {
     try {
-      let id: string = '';
+      let ids: string[] = [];
       
-      if (algorithm === 'cuid2') {
-        id = createId();
-      } else {
-        id = uuidv4();
+      for (let i = 0; i < quantity; i++) {
+        if (algorithm === 'cuid2') {
+          ids.push(createId());
+        } else {
+          ids.push(uuidv4());
+        }
       }
 
-      if (!id) {
-        throw new Error(`Failed to generate ${algorithm} ID`);
+      if (ids.length === 0) {
+        return {
+          content: [
+            {
+              type: 'text',
+              text: 'Failed to generate IDs'
+            }
+          ],
+          isError: true
+        }
       }
 
       return {
         content: [
           { 
             type: 'text', 
-            text: id
+            text: ids.join(',')
           }
         ]
       };
