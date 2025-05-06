@@ -5,8 +5,9 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { createId } from '@paralleldrive/cuid2';
 import { v4 as uuidv4 } from 'uuid';
 import { z } from 'zod';
+import { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 
-const version = '0.1.3';
+const version = '0.1.4';
 
 const server = new McpServer({
   name: 'id-generator',
@@ -32,39 +33,28 @@ server.tool(
       }
 
       if (ids.length === 0) {
-        return {
-          content: [
-            {
-              type: 'text',
-              text: 'Failed to generate IDs'
-            }
-          ],
-          isError: true
-        }
+        return respond('Failed to generate IDs', true);
       }
 
-      return {
-        content: [
-          { 
-            type: 'text', 
-            text: ids.join(',')
-          }
-        ]
-      };
+      return respond(ids.join(','));
     } catch (err: unknown) {
       const error = err as Error;
-      return {
-        content: [
-          {
-            type: 'text',
-            text: `Error: ${error.message}`
-          }
-        ],
-        isError: true
-      }
+      return respond(`Error: ${error.message}`, true);
     }
   }
 );
+
+function respond(text: string, isError: boolean = false): CallToolResult {
+  return {
+    content: [
+      {
+        type: 'text' as const,
+        text
+      }
+    ],
+    isError
+  };
+}
 
 const transport = new StdioServerTransport();
 await server.connect(transport);
