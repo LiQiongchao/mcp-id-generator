@@ -4,10 +4,12 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { createId } from '@paralleldrive/cuid2';
 import { v4 as uuidv4 } from 'uuid';
+import { nanoid } from 'nanoid';
+import { ulid } from 'ulid';
 import { z } from 'zod';
 import { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 
-const version = '0.1.4';
+const version = '0.1.5';
 
 const server = new McpServer({
   name: 'id-generator',
@@ -17,7 +19,7 @@ const server = new McpServer({
 server.tool(
   'generate-id',
   {
-    algorithm: z.enum(['cuid2', 'uuid']).default('cuid2'),
+    algorithm: z.enum(['cuid2', 'uuid', 'nanoid', 'ulid']).default('cuid2'),
     quantity: z.number().default(1),
   },
   async ({ algorithm, quantity }) => {
@@ -25,10 +27,20 @@ server.tool(
       let ids: string[] = [];
       
       for (let i = 0; i < quantity; i++) {
-        if (algorithm === 'cuid2') {
-          ids.push(createId());
-        } else {
-          ids.push(uuidv4());
+        switch (algorithm) {
+          case 'cuid2':
+            ids.push(createId());
+            break;
+          case 'nanoid':
+            ids.push(nanoid());
+            break;
+          case 'ulid':
+            ids.push(ulid());
+            break;
+          case 'uuid':
+          default:
+            ids.push(uuidv4());
+            break;
         }
       }
 

@@ -1,6 +1,6 @@
 {
   "name": "@devstacks/id-generator-mcp",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "MCP server for generating IDs with different algorithms",
   "author": "Moacir Braga <me@moacirbrg.com>",
   "license": "MIT",
@@ -23,6 +23,8 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.11.0",
     "@paralleldrive/cuid2": "^2.2.2",
+    "nanoid": "^5.1.5",
+    "ulid": "^3.0.0",
     "uuid": "^11.1.0",
     "zod": "^3.24.4"
   },
