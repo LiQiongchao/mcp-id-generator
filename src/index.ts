@@ -6,7 +6,7 @@ import { createId } from '@paralleldrive/cuid2';
 import { v4 as uuidv4 } from 'uuid';
 import { z } from 'zod';
 
-const version = '0.1.1';
+const version = '0.1.2';
 
 const server = new McpServer({
   name: 'id-generator',

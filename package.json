@@ -1,6 +1,6 @@
 {
   "name": "@devstacks/id-generator-mcp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "MCP server for generating IDs with different algorithms",
   "author": "Moacir Braga <me@moacirbrg.com>",
   "license": "MIT",
