@@ -1,10 +1,19 @@
 # ID Generator MCP
+[![smithery badge](https://smithery.ai/badge/@devstacks-software-engineering/id-generator-mcp)](https://smithery.ai/server/@devstacks-software-engineering/id-generator-mcp)
 
 This is a Model Context Protocol (MCP) server that provides ID generation capabilities to AI assistants.
 
 ## Installation
 
 The ID Generator MCP can be integrated with various AI assistant platforms. Below are instructions for different environments:
+
+### Installing via Smithery
+
+To install ID Generator MCP for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@devstacks-software-engineering/id-generator-mcp):
+
+```bash
+npx -y @smithery/cli install @devstacks-software-engineering/id-generator-mcp --client claude
+```
 
 ### Claude Code
 
