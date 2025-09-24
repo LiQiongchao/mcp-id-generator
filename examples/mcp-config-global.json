@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "id-generator": {
+      "command": "id-generator",
+      "args": [],
+      "env": {}
+    }
+  }
+}

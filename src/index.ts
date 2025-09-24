@@ -6,10 +6,15 @@ import { createId } from '@paralleldrive/cuid2';
 import { v4 as uuidv4 } from 'uuid';
 import { nanoid } from 'nanoid';
 import { ulid } from 'ulid';
+import { Snowflake } from '@sapphire/snowflake';
 import { z } from 'zod';
 import { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 
-const version = '0.1.5';
+const version = '0.1.0';
+
+// 初始化雪花算法实例，使用与MyBatis-Plus相同的epoch时间（2010-11-04 01:42:54.657 UTC）
+// 这确保生成的ID与MyBatis-Plus兼容
+const snowflake = new Snowflake(1288834974657n);
 
 const server = new McpServer({
   name: 'id-generator',
@@ -19,7 +24,7 @@ const server = new McpServer({
 server.tool(
   'generate-id',
   {
-    algorithm: z.enum(['cuid2', 'uuid', 'nanoid', 'ulid']).default('cuid2'),
+    algorithm: z.enum(['cuid2', 'uuid', 'nanoid', 'ulid', 'snowflake']).default('cuid2'),
     quantity: z.number().default(1),
   },
   async ({ algorithm, quantity }) => {
@@ -36,6 +41,9 @@ server.tool(
             break;
           case 'ulid':
             ids.push(ulid());
+            break;
+          case 'snowflake':
+            ids.push(snowflake.generate().toString());
             break;
           case 'uuid':
           default:

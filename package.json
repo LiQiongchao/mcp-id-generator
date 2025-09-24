@@ -1,8 +1,8 @@
 {
-  "name": "@devstacks/id-generator-mcp",
-  "version": "0.1.5",
-  "description": "MCP server for generating IDs with different algorithms",
-  "author": "Moacir Braga <me@moacirbrg.com>",
+  "name": "@clancy_lee/mcp-id-generator",
+  "version": "0.1.0",
+  "description": "MCP server for generating IDs with different algorithms including Snowflake compatible with MyBatis-Plus",
+  "author": "Clancy Lee <clancylee.818@gmail.com>",
   "license": "MIT",
   "type": "module",
   "main": "build/index.js",
@@ -11,18 +11,51 @@
   },
   "scripts": {
     "build": "tsc && chmod +x build/index.js",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
+    "prepack": "npm run build",
+    "test": "npm run build && cd tests && node test-mcp.js",
+    "test:snowflake": "npm run build && cd tests && node test-snowflake.js",
+    "test:compatibility": "npm run build && cd tests && node test-mybatis-plus-compatibility.js",
+    "test:external": "npm run build && cd tests && node test-external-call.js",
+    "test:all": "npm run test && npm run test:snowflake && npm run test:compatibility",
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish"
   },
   "keywords": [
     "mcp",
     "id",
     "generator",
     "cuid2",
-    "uuid"
+    "uuid",
+    "nanoid",
+    "ulid",
+    "snowflake",
+    "distributed-id",
+    "mybatis-plus",
+    "model-context-protocol"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liqiongchao/mcp-id-generator.git"
+  },
+  "homepage": "https://github.com/liqiongchao/mcp-id-generator#readme",
+  "bugs": {
+    "url": "https://github.com/liqiongchao/mcp-id-generator/issues"
+  },
+  "files": [
+    "build/",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.11.0",
     "@paralleldrive/cuid2": "^2.2.2",
+    "@sapphire/snowflake": "^3.5.5",
     "nanoid": "^5.1.5",
     "ulid": "^3.0.0",
     "uuid": "^11.1.0",

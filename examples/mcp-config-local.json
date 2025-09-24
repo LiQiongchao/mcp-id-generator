@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "id-generator": {
+      "command": "node",
+      "args": ["/Users/liqiongchao/code_workspace/openSource/liqiongchao/mcp-id-generator/build/index.js"],
+      "env": {}
+    }
+  }
+}
