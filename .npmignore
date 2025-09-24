@@ -15,8 +15,9 @@ smithery.yaml
 
 # Testing and development
 tests/
-examples/
-docs/
+# examples/ - keep examples for reference
+# docs/ - keep docs for reference
+# bin/ - keep bin for terminal usage
 *.test.js
 *.test.ts
 *.spec.js

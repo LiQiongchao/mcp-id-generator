@@ -106,6 +106,18 @@ Once installed, the ID Generator MCP can be used by the AI assistant to generate
 - Simple API integration
 - Support for generating multiple IDs at once
 
+## Documentation
+
+- [Terminal Usage Guide](docs/TERMINAL_USAGE.md) - How to use in terminal/command line
+- [Snowflake ID Guide](docs/SNOWFLAKE_ID_GUIDE.md) - Detailed Snowflake algorithm documentation
+- [NPM Publish Guide](docs/NPM_PUBLISH_GUIDE.md) - Publishing and versioning guide
+- [Project Structure](docs/PROJECT_STRUCTURE.md) - Project organization
+
+## Examples
+
+- [MCP Configuration Examples](examples/) - Various MCP client configurations
+- [Command Line Tools](bin/) - Direct terminal usage tools
+
 ## License
 
 MIT
